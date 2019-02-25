@@ -4,6 +4,7 @@ from text import get_text
 from gpiozero import Button
 from time import sleep
 import logging
+import subprocess
 
 logger = logging.getLogger('photobooth')
 logging.basicConfig(level=logging.INFO)
@@ -33,12 +34,9 @@ def capture_photos(n):
     """
     Capture n photos in sequence and return a list of file paths
     """
-    photos = []
     for pic in range(n):
         #camera.annotate_text = text['photo number'].format(pic + 1, n)
         #sleep(1)
-        camera.annotate_text = text['press to capture']
-        button.wait_for_press()
         logger.info("button pressed")
         button.wait_for_release()
         logger.info("button released")
@@ -48,14 +46,20 @@ def capture_photos(n):
         photo = camera.capture()
         logger.info("captured photo: {}".format(photo))
         #photos.append(photo)
-    return photos
+    return photo
 
 button.when_held = quit
 
 while True:
     #camera.annotate_text = text['ready']
     logger.info("waiting for button press")
+    camera.annotate_text = text['press to capture']
     button.wait_for_press()
     camera.start_preview()
     logger.info("button pressed")
-    photos = capture_photos(1)
+    photo = capture_photos(1)
+    photos.append(photo)
+    camera.stop_preview
+    proc = subprocess.Popen(["fbi","-a",photo])
+    sleep(6)
+    proc.terminate()
