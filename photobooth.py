@@ -3,6 +3,8 @@ from auth import CON_KEY, CON_SEC, ACC_TOK, ACC_SEC
 from text import get_text
 from gpiozero import Button
 from time import sleep
+import os
+import sys, subprocess
 import logging
 import subprocess
 
@@ -50,7 +52,29 @@ def capture_photo():
     
     return photo
 
+def create_tab_image(path):
+    """
+    Read a folder and create an array with the paths
+    """
+    photos = os.listdir(path)
+    return photos
+    
+def slideshow():
+   cpt = 0
+   while(True): 
+        if cpt > len(photos):
+            cpt = 0
+    
+        proc = subprocess.Popen("fbi", "-a", photos[cpt])
+        cpt += 1
+        sleep(5)
+        proc.terminate()
+        
+
+
 button.when_held = quit
+
+photos = create_tab_image("/home/pi/Pictures")
 
 while True:
     logger.info("waiting for button press")
