@@ -4,6 +4,7 @@ from text import get_text
 from gpiozero import Button
 from twython import Twython
 from time import sleep
+import os
 import logging
 
 logger = logging.getLogger('photobooth')
@@ -78,6 +79,16 @@ def tweet_photos(status, photos):
     twitter.update_status(status=status, media_ids=photos)
     logger.info("tweeted successfully")
     camera.annotate_text = text['tweeted']
+
+def create_tab_image(path):
+    """
+    Read a folder and create an array with the paths
+    """
+    photos = os.listdir(path)
+    for file in photos:
+        print(file)
+    
+
 
 button.when_held = quit
 
