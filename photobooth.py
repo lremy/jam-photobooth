@@ -32,36 +32,30 @@ def countdown(n):
         sleep(1)
     camera.annotate_text = None
 
-def capture_photos(n):
+def capture_photo():
     """
     Capture n photos in sequence and return a list of file paths
     """
-    for pic in range(n):
-        #camera.annotate_text = text['photo number'].format(pic + 1, n)
-        #sleep(1)
-        logger.info("button pressed")
-        button.wait_for_release()
-        logger.info("button released")
-        sleep(1)
-        countdown(3)
-        logger.info("capturing photo")
-        photo = camera.capture()
-        logger.info("captured photo: {}".format(photo))
-        #photos.append(photo)
+    camera.start_preview()
+    button.wait_for_release()
+    logger.info("button released")
+    countdown(3)
+    logger.info("capturing photo")
+    photo = camera.capture()
+    logger.info("captured photo: {}".format(photo))
+    camera.stop_preview()
+    proc = subprocess.Popen(["fbi","-a",photo])
+    sleep(6)
+    proc.terminate()
+    
     return photo
 
 button.when_held = quit
 
 while True:
-    #camera.annotate_text = text['ready']
     logger.info("waiting for button press")
     camera.annotate_text = text['press to capture']
     button.wait_for_press()
-    camera.start_preview()
     logger.info("button pressed")
-    photo = capture_photos(1)
+    photo = capture_photo()
     photos.append(photo)
-    camera.stop_preview
-    proc = subprocess.Popen(["fbi","-a",photo])
-    sleep(6)
-    proc.terminate()
