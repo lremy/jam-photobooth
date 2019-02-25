@@ -85,12 +85,13 @@ def create_tab_image(path):
     Read a folder and create an array with the paths
     """
     photos = os.listdir(path)
-    for file in photos:
-        print(file)
+    return photos
     
 
 
 button.when_held = quit
+
+photosArray = create_tab_image("/home/pi/Pictures")
 
 while True:
     camera.annotate_text = text['ready']
