@@ -5,6 +5,7 @@ from gpiozero import Button
 from twython import Twython
 from time import sleep
 import os
+import sys, subprocess
 import logging
 
 logger = logging.getLogger('photobooth')
@@ -87,11 +88,22 @@ def create_tab_image(path):
     photos = os.listdir(path)
     return photos
     
+def slideshow():
+   cpt = 0
+   while(True): 
+        if cpt > len(photos):
+            cpt = 0
+    
+        proc = subprocess.Popen("fbi", "-a", photos[cpt])
+        cpt += 1
+        sleep(5)
+        proc.terminate()
+        
 
 
 button.when_held = quit
 
-photosArray = create_tab_image("/home/pi/Pictures")
+photos = create_tab_image("/home/pi/Pictures")
 
 while True:
     camera.annotate_text = text['ready']
