@@ -6,6 +6,8 @@ from time import sleep
 import logging
 import subprocess
 
+photos = []
+
 logger = logging.getLogger('photobooth')
 logging.basicConfig(level=logging.INFO)
 logger.info("starting")
