@@ -4,7 +4,6 @@ from text import get_text
 from gpiozero import Button
 from time import sleep
 import os
-import sys, subprocess
 import logging
 import subprocess
 
@@ -67,19 +66,25 @@ def slideshow():
     
         proc = subprocess.Popen("fbi", "-a", photos[cpt])
         cpt += 1
-        sleep(5)
-        proc.terminate()
+        pressed = button.wait_for_press(timeout=6)
+        if pressed:
+            proc.terminate()
+            logger.info("button pressed")
+            photo = capture_photo()
+            photos.append(photo)
+        else:
+            proc.terminate()
         
-
-
 button.when_held = quit
 
 photos = create_tab_image("/home/pi/Pictures")
 
-while True:
-    logger.info("waiting for button press")
-    camera.annotate_text = text['press to capture']
-    button.wait_for_press()
-    logger.info("button pressed")
-    photo = capture_photo()
-    photos.append(photo)
+slideshow()
+
+#while True:
+    #logger.info("waiting for button press")
+    #camera.annotate_text = text['press to capture']
+    #button.wait_for_press()
+    #logger.info("button pressed")
+    #photo = capture_photo()
+    #photos.append(photo)
