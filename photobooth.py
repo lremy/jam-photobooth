@@ -4,12 +4,19 @@ from text import get_text
 from gpiozero import Button
 from time import sleep
 import logging
+import subprocess
+import glob
 
 logger = logging.getLogger('photobooth')
 logging.basicConfig(level=logging.INFO)
 logger.info("starting")
 
 text = get_text(language='en')
+
+photo_path = "/home/pi/Pictures"
+default_photo = "/home/pi/Pictures/default_photo.jpg"
+slideshow_delay = 5
+slideshow_base = ["fbi","-a","--noverbose"]
 
 camera = JamPiCamera()
 button = Button(14, hold_time=5)
@@ -47,7 +54,29 @@ def capture_photo():
     logger.info("captured photo: {}".format(photo))
     return photo
 
+#run a slideshow with the specified list of photos or default photo if empty list
+#returns the proc id
+def slideshow(photos):
+    logger.info("[slideshow] start")
+    if len(photos) > 0:
+        logger.info("[slideshow] use list of photos")
+        proc = subprocess.Popen(slideshow_base + ["-t",str(slideshow_delay)] + photos)
+    else:
+        logger.info("[slideshow] use default photo")
+        proc = subprocess.Popen(slideshow_base + [default_photo])
+    return proc
+
+#list all png files in the specified folder
+def list_photos(folder):
+    return glob.glob(folder+"/*.png")
+
 button.when_held = quit
 
+photos = list_photos(photo_path)
+
 while True:
+    logger.info("start slideshow")
+    proc = slideshow(photos)
+    logger.info("capture photo")
     photo = capture_photo()
+    photos = [photo] + photos
