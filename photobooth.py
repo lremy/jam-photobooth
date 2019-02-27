@@ -11,7 +11,7 @@ logger = logging.getLogger('photobooth')
 logging.basicConfig(level=logging.INFO)
 logger.info("starting")
 
-text = get_text(language='en')
+text = get_text(language='fr')
 
 photo_path = "/home/pi/Pictures"
 default_photo = "/home/pi/Pictures/default_photo.jpg"
