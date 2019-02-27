@@ -37,7 +37,7 @@ def countdown(n):
 
 #capture a photo
 def capture_photo():
-    camera.annotate_text = text['press to capture']
+    camera.annotate_text = text['ready']
     button.wait_for_release()
     logger.info("button released")
     sleep(1)

@@ -1,36 +1,21 @@
 # English
 text_en = {
-    'photo number': "Photo {} of {}",
-    'press to capture': "Press the button to capture...",
-    'ready': "Ready!\n" "Press the button to start...",
+    'ready': "Ready for the photo?",
 }
 
 # German - Deutsche
 text_de = {
-    'photo number': "Foto {} von {}",
-    'press to capture': "Drucke den Knopf fur ein Foto...",
-    'ready': "Bereit!\n" "Drucke den Knopf um zu starten...",
+    'ready': "Bereit fur das Foto?",
 }
 
 # French - Français
 text_fr = {
-    'photo number': "Photo {} de {}",
-    'press to capture': "Appuyez sur le bouton pour capturer...",
-    'ready': "Pret!\n" "Appuyez sur le bouton pour commencer...",
+    'ready': "Pret(s) pour la photo?",
 }
 
 # Spanish - Español
 text_es = {
-    'photo number': "Foto {} de {}",
-    'press to capture': "Presione el boton para sacar fotos...",
-    'ready': "Listo!\n" "Presione el boton para comenzar...",
-}
-
-# Welsh - Cymraeg
-text_cy = {
-    'photo number': "Llun {} o {}",
-    'press to capture': "Gwasgwch y botwm i'w dal...",
-    'ready': "Barod!\n" "Gwasgwch y botwm i ddechrau...",
+    'ready': "Listo para la foto?",
 }
 
 language_dicts = {
@@ -38,7 +23,6 @@ language_dicts = {
     'de': text_de,
     'fr': text_fr,
     'es': text_es,
-    'cy': text_cy,
 }
 
 def get_text(language='en'):
