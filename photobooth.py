@@ -1,5 +1,4 @@
 from jam_picamera import JamPiCamera
-from auth import CON_KEY, CON_SEC, ACC_TOK, ACC_SEC
 from text import get_text
 from gpiozero import Button
 from time import sleep
