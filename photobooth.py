@@ -39,7 +39,7 @@ def capture_photo():
     camera.annotate_text = text['ready']
     button.wait_for_release()
     logger.info("button released")
-    sleep(1)
+    sleep(3)
     countdown(3)
     logger.info("capturing photo")
     photo = camera.capture(text["processing"])
