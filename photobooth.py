@@ -23,10 +23,12 @@ button = Button(14, hold_time=5)
 camera.resolution = (1024, 768)
 camera.annotate_text_size = 70
 
+#leave the script
 def quit():
     logger.info("quitting")
     camera.close()
 
+#runs a countdown and display it on camera
 def countdown(n):
     logger.info("running countdown")
     for i in reversed(range(n)):
@@ -42,7 +44,7 @@ def capture_photo():
     sleep(3)
     countdown(3)
     logger.info("capturing photo")
-    photo = camera.capture(text["processing"])
+    photo = camera.capture(processing_text = text["processing"])
     logger.info("captured photo: {}".format(photo))
     return photo
 
@@ -61,6 +63,7 @@ def slideshow(photos):
 #list all png files in the specified folder
 def list_photos(folder):
     return glob.glob(folder+"/*.png")
+
 
 button.when_held = quit
 
