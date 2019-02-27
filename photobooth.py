@@ -20,10 +20,6 @@ slideshow_base = ["fbi","-a","--noverbose"]
 
 camera = JamPiCamera()
 button = Button(14, hold_time=5)
-if CON_KEY:
-    twitter = Twython(CON_KEY, CON_SEC, ACC_TOK, ACC_SEC)
-else:
-    twitter = None
 
 camera.resolution = (1024, 768)
 camera.start_preview()
