@@ -1,20 +1,11 @@
-# Raspberry Jam Photobooth
+# Raspberry Jam Photobooth with slideshow
 
-Yet another Raspberry Pi photobooth project. This one is made especially for
-Raspberry Jams participating in the [Big Birthday Weekend](http://rpf.io/bday).
+This is an update from the Raspberry Jam Photobooth project.
 
-![](img/tweet.png)
+Features have been changed to the following:
 
-Its features include:
-
-- Interactivity provided by text annotations and the push button for control
-- By default takes 4 photographs, each controlled by the button
-- Tweets the 4 photographs (unless the button is pressed to cancel) with the
-Raspberry Jam Birthday logo overlaid in the corner, and a specified message with
-the tweet
-- Works offline or without Twitter feature if not configured
-
-![](img/tweet2.png)
+- run a slideshow with all photos or a default photo if no photos have been taken
+- when button pressed, stop slideshow and take one photo, the restart slideshow with the last taken photo first
 
 ## Requirements
 
@@ -30,20 +21,9 @@ Software:
 
 - Picamera
 - GPIO Zero
-- Twython
+- fbi
 
-## Automated installation
-
-Open a terminal window and type:
-
-```
-curl -sSL http://rpf.io/jampb | bash
-```
-
-Note this reboots the Pi at the end of the script, and launches the program
-automatically.
-
-## Manual installation
+## Installation
 
 Start with a Raspbian Stretch desktop image.
 
@@ -60,14 +40,19 @@ main menu, or using `raspi-config` on the command line.
 
     ```
     sudo apt update
-    sudo apt install python3-gpiozero python3-picamera python3-pip git -y
-    sudo pip3 install twython --upgrade
+    sudo apt install python3-gpiozero python3-picamera python3-pip fbi git -y
     ```
 
 1. Git clone this repository:
 
     ```
-    git clone https://github.com/raspberrypifoundation/jam-photobooth
+    git clone https://github.com/lremy/jam-photobooth
+    ```
+
+1. Create folder to store photos
+
+    ```
+    mkdir /home/pi/Pictures
     ```
 
 1. Enter the project directory and run the photobooth script:
@@ -76,18 +61,9 @@ main menu, or using `raspi-config` on the command line.
     python3 photobooth.py
     ```
 
-1. You should see an image preview appear, and the message:
+1. You should see the default image
 
-    ```
-    Ready!
-    Press the button to start...
-    ```
-
-1. Now use the button to progress to the next step, and continue.
-
-1. Without a Twitter API key, the application will not attempt to tweet the
-photos. It will simply save the photos in the `Pictures` folder at
-`/home/pi/Pictures`.
+1. Press the button to capture a photo
 
 1. Press and hold the GPIO button for 5 seconds to close the application.
 
@@ -96,43 +72,6 @@ photos. It will simply save the photos in the `Pictures` folder at
     ```
     @reboot python3 /home/pi/jam-photobooth/photobooth.py &
     ```
-
-## Twitter API keys
-
-In order to enable the Twitter feature, you'll need to provide Twitter API keys
-for the account you wish the photobooth to tweet from, i.e. your Jam's Twitter
-account.
-
-1. Log in to Twitter and ensure a mobile number is added to your account.
-
-1. Go to [apps.twitter.com](https://apps.twitter.com/) and create a new app.
-
-1. Fill out your application details. If you use
-`https://github.com/raspberrypifoundation/jam-photobooth` as the website, other
-people will be able to see what generated the tweet.
-
-1. Go to `Keys and tokens` and click the `Create my access tokens` button.
-
-1. Open `auth.py` from the project folder and enter your consumer key, consumer
-secret, access token and access token secret in the variables provided, e.g:
-
-    ```
-    CON_KEY = '0GrZb5jUk9O9KK9W6xhALmNhD'
-    CON_SEC = 'CDXCGvmGuMvOBQvvrDZO7lzbj83rDMVpcEnqWYXxkfLGfGrFpL'
-    ACC_TOK = '27241881-XPa2YtoA4PwHkIelgYYgMbf24kaEYXj4bp6Ualmk8'
-    ACC_SEC = 'ruydKmwQ1ft5fPNkL3AVsOS6EltMdutkek3N80Dlhsjkl'
-    ```
-
-    Now when you run `photobooth.py`, it will be able to tweet the photos. There
-    is an option to cancel a tweet before it is sent.
-
-    Photos tweeted are still stored in the `Pictures` folder.
-
-    To disable the Twitter feature, simply restore the `CON_KEY` variable to an
-    empty string
-
-    **IMPORTANT: Do not share the API keys. Do not accidentally push them to
-    GitHub.**
 
 ## Languages
 
@@ -156,7 +95,6 @@ Current language support:
 - German (Deutsche) - `de`
 - French (Français) - `fr`
 - Spanish (Español) - `es`
-- Welsh (Cymraeg) - `cy`
 
 Pull requests with more language support welcome, as are any improvements to
 existing translations (they were all done using Google Translate).
