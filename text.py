@@ -1,66 +1,36 @@
 # English
 text_en = {
-    'tweet': "#PiParty photo booth",
     'photo number': "Photo {} of {}",
     'press to capture': "Press the button to capture...",
-    'tweeting': "Tweeting...",
-    'tweeted': "Tweeted!",
-    'tweeting with cancel': "Tweeting...\n" "Press the button to cancel",
     'ready': "Ready!\n" "Press the button to start...",
-    'failed tweet': "Failed to tweet :(",
-    'not tweeting': "Not tweeting",
 }
 
 # German - Deutsche
 text_de = {
-    'tweet': "#PiParty Fotoautomat",
     'photo number': "Foto {} von {}",
     'press to capture': "Drucke den Knopf fur ein Foto...",
-    'tweeting': "Am Twittern...",
-    'tweeted': "Getwittert!",
-    'tweeting with cancel': "Am Twittern...\n" "Drucke den Knopf um abzubrechen",
     'ready': "Bereit!\n" "Drucke den Knopf um zu starten...",
-    'failed tweet': "Fehler beim Twittern :(",
-    'not tweeting': "Nicht am Twittern",
 }
 
 # French - Français
 text_fr = {
-    'tweet': "Photomaton #PiParty",
     'photo number': "Photo {} de {}",
     'press to capture': "Appuyez sur le bouton pour capturer...",
-    'tweeting': "Tweetant...",
-    'tweeted': "Tweete!",
-    'tweeting with cancel': "Tweetant...\n" "Appuyez sur le bouton pour annuler",
     'ready': "Pret!\n" "Appuyez sur le bouton pour commencer...",
-    'failed tweet': "Echec du tweet :(",
-    'not tweeting': "Non tweetant",
 }
 
 # Spanish - Español
 text_es = {
-    'tweet': "#PiParty cabina de fotos",
     'photo number': "Foto {} de {}",
     'press to capture': "Presione el boton para sacar fotos...",
-    'tweeting': "Tuiteando...",
-    'tweeted': "Tuit enviado!",
-    'tweeting with cancel': "Tuiteando...\n" "Presione el boton para cancelar",
     'ready': "Listo!\n" "Presione el boton para comenzar...",
-    'failed tweet': "Error al tuitear :(",
-    'not tweeting': "Tuit cancelado",
 }
 
 # Welsh - Cymraeg
 text_cy = {
-    'tweet': "#PiParty bwth lluniau",
     'photo number': "Llun {} o {}",
     'press to capture': "Gwasgwch y botwm i'w dal...",
-    'tweeting': "Tweetio...",
-    'tweeted': "Tweetio!",
-    'tweeting with cancel': "Tweetio...\n" "Gwasgwch y botwm i ganslo",
     'ready': "Barod!\n" "Gwasgwch y botwm i ddechrau...",
-    'failed tweet': "Methwyd tweet :(",
-    'not tweeting': "Ddim yn tweetio",
 }
 
 language_dicts = {
@@ -80,5 +50,4 @@ def get_text(language='en'):
 # test for non-ascii characters not supported by the camera firmware
 for language in language_dicts.values():
     for key, text in language.items():
-        if key != 'tweet':
-            assert all(ord(c) in range(128) for c in text), text
+        assert all(ord(c) in range(128) for c in text), text
