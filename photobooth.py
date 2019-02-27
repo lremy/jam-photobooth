@@ -5,6 +5,7 @@ from time import sleep
 import logging
 import subprocess
 import glob
+import os
 
 logger = logging.getLogger('photobooth')
 logging.basicConfig(level=logging.INFO)
@@ -13,7 +14,7 @@ logger.info("starting")
 text = get_text(language='fr')
 
 photo_path = "/home/pi/Pictures"
-default_photo = "/home/pi/Pictures/default_photo.jpg"
+default_photo = os.path.join(os.path.dirname(__file__),"default_photo.jpg")
 slideshow_delay = 4
 slideshow_base = ["fbi","-a","--noverbose"]
 
@@ -62,7 +63,7 @@ def slideshow(photos):
 
 #list all png files in the specified folder
 def list_photos(folder):
-    return glob.glob(folder+"/*.png")
+    return glob.glob(os.path.join(folder,"/*.png"))
 
 
 button.when_held = quit
