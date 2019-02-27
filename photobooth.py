@@ -14,7 +14,7 @@ text = get_text(language='fr')
 
 photo_path = "/home/pi/Pictures"
 default_photo = "/home/pi/Pictures/default_photo.jpg"
-slideshow_delay = 5
+slideshow_delay = 4
 slideshow_base = ["fbi","-a","--noverbose"]
 
 camera = JamPiCamera()
