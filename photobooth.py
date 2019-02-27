@@ -22,7 +22,6 @@ camera = JamPiCamera()
 button = Button(14, hold_time=5)
 
 camera.resolution = (1024, 768)
-camera.start_preview()
 camera.annotate_text_size = 70
 
 def quit():
@@ -39,8 +38,6 @@ def countdown(n):
 #capture a photo
 def capture_photo():
     camera.annotate_text = text['press to capture']
-    button.wait_for_press()
-    logger.info("button pressed")
     button.wait_for_release()
     logger.info("button released")
     sleep(1)
@@ -73,6 +70,12 @@ photos = list_photos(photo_path)
 while True:
     logger.info("start slideshow")
     proc = slideshow(photos)
+    camera.stop_preview()
+    button.wait_for_press()
+    logger.info("button pressed")
+    logger.info("terminate slideshow")
+    camera.start_preview()
+    proc.terminate()
     logger.info("capture photo")
     photo = capture_photo()
     photos = [photo] + photos
