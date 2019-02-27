@@ -43,7 +43,7 @@ def capture_photo():
     sleep(1)
     countdown(3)
     logger.info("capturing photo")
-    photo = camera.capture()
+    photo = camera.capture(text["processing"])
     logger.info("captured photo: {}".format(photo))
     return photo
 

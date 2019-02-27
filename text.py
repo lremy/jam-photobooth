@@ -1,21 +1,25 @@
 # English
 text_en = {
     'ready': "Ready for the photo?",
+    'processing': "Processing the photo...",
 }
 
 # German - Deutsche
 text_de = {
     'ready': "Bereit fur das Foto?",
+    'processing': "Fotobearbeitung...",
 }
 
 # French - Français
 text_fr = {
     'ready': "Pret(s) pour la photo?",
+    'processing': "Traitement de la photo...",
 }
 
 # Spanish - Español
 text_es = {
     'ready': "Listo para la foto?",
+    'processing': "Procesamiento de fotos...",
 }
 
 language_dicts = {

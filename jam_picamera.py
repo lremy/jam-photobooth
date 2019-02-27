@@ -30,9 +30,10 @@ class JamPiCamera(PiCamera):
         self.add_overlay(pad.tobytes(), alpha=50, layer=3)
         super(JamPiCamera, self).start_preview()
 
-    def capture(self):
+    def capture(self,processing_text="Processing photo..."):
         output = _gen_filename()
         super(JamPiCamera, self).capture(output)
+        self.annotate_text = processing_text
         output_img = Image.open(output).convert('RGBA')
         new_output = Image.alpha_composite(output_img, overlay)
         new_output.save(output)
